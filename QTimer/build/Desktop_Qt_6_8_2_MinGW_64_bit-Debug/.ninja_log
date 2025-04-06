@@ -1,0 +1,10 @@
+# ninja log v6
+7	700	7627972363388782	QTimer_autogen/timestamp	85728d4ee9d25f2b
+7	700	7627972363388782	QTimer_autogen/mocs_compilation.cpp	85728d4ee9d25f2b
+7	700	7627972363388782	C:/Users/leonh/OneDrive/Dokumenty/skola/Ing/2.semestr/qt/QTimer/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/QTimer_autogen/timestamp	85728d4ee9d25f2b
+7	700	7627972363388782	C:/Users/leonh/OneDrive/Dokumenty/skola/Ing/2.semestr/qt/QTimer/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/QTimer_autogen/mocs_compilation.cpp	85728d4ee9d25f2b
+717	2006	7627972364361290	CMakeFiles/QTimer.dir/State.cpp.obj	f6d2bb43ffa05fe3
+707	2852	7627972364255123	CMakeFiles/QTimer.dir/QTimer_autogen/mocs_compilation.cpp.obj	a3515aa53338d1ff
+710	2972	7627972364291250	CMakeFiles/QTimer.dir/main.cpp.obj	892362360279accd
+713	3225	7627972364321252	CMakeFiles/QTimer.dir/mainwindow.cpp.obj	d2231097ed406450
+3226	3486	7627972389449031	QTimer.exe	9ef249a869d1fa12

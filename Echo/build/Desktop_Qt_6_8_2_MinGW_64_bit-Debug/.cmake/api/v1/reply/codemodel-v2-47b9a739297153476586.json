@@ -1,0 +1,61 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-c27b86d2f959597c92ff.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Echo",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Echo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Echo-Debug-bdbcf31c83b4bfa4ed30.json",
+					"name" : "Echo",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/leonh/OneDrive/Dokumenty/skola/Ing/2.semestr/qt/Echo/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/leonh/OneDrive/Dokumenty/skola/Ing/2.semestr/qt/Echo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

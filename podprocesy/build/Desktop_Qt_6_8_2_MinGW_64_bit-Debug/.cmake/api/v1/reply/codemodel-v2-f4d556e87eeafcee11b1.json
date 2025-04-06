@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-5e63b5364b3e24224f7b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "podprocesy",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "podprocesy::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-podprocesy-Debug-750e66772dd76588a445.json",
+					"name" : "podprocesy",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "podprocesy_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-podprocesy_autogen-Debug-6d3c79a4370db461bcad.json",
+					"name" : "podprocesy_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "podprocesy_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-podprocesy_autogen_timestamp_deps-Debug-6a8b8adeb9f95c91ff1d.json",
+					"name" : "podprocesy_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/leonh/OneDrive/Dokumenty/skola/Ing/2.semestr/qt/podprocesy/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/leonh/OneDrive/Dokumenty/skola/Ing/2.semestr/qt/podprocesy"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
