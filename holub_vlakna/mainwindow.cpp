@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include <QThreadPool>
+#include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,16 +35,16 @@ void MainWindow::on_factorialStart_clicked()
         connect(factorialTask, &FactorialTask::progressChanged, ui->factorialProgressBar, &QProgressBar::setValue);
         connect(factorialTask, &FactorialTask::etaChanged, ui->factorialETA, &QLabel::setText);
         connect(factorialTask, &FactorialTask::finished, this, [=](const QString &result) {
-            ui->outputText->append("Faktoriál dokončen: " + result);
             factorialRunning = false;
             ui->factorialStart->setText("Start");
+            ui->factorialETA->setText("Hotovo");
         });
         connect(factorialTask, &FactorialTask::canceled, this, [=]() {
-            ui->outputText->append("Faktoriál zrušen.");
             factorialRunning = false;
             ui->factorialStart->setText("Start");
         });
-        connect(factorialTask, &FactorialTask::logMessage, ui->outputText, &QTextEdit::append);
+
+        connect(factorialTask, &FactorialTask::logMessage, this, &MainWindow::logMessage);
 
         QThreadPool::globalInstance()->start(factorialTask);
         factorialRunning = true;
@@ -53,13 +54,13 @@ void MainWindow::on_factorialStart_clicked()
     } else if (!factorialPaused) {
         factorialTask->pause();
         factorialPaused = true;
-        ui->outputText->append("Faktoriál pozastaven.");
+        logMessage("Faktoriál pozastaven.");
         ui->factorialStart->setText("Pokračovat");
 
     } else {
         factorialTask->resume();
         factorialPaused = false;
-        ui->outputText->append("Faktoriál pokračuje.");
+        logMessage("Faktoriál pokračuje.");
         ui->factorialStart->setText("Pozastavit");
     }
 }
@@ -93,16 +94,16 @@ void MainWindow::on_primeStart_clicked()
         connect(primeTask, &PrimeTask::progressChanged, ui->primeProgressBar, &QProgressBar::setValue);
         connect(primeTask, &PrimeTask::etaChanged, ui->primeETA, &QLabel::setText);
         connect(primeTask, &PrimeTask::finished, this, [=](const QString &result) {
-            ui->outputText->append("Prvočísla: " + result);
+            logMessage("Prvočísla: " + result);
             primeRunning = false;
             ui->primeStart->setText("Start");
+            ui->primeETA->setText("Hotovo");
         });
         connect(primeTask, &PrimeTask::canceled, this, [=]() {
-            ui->outputText->append("Výpočet prvočísel zrušen.");
             primeRunning = false;
             ui->primeStart->setText("Start");
         });
-        connect(primeTask, &PrimeTask::logMessage, ui->outputText, &QTextEdit::append);
+        connect(primeTask, &PrimeTask::logMessage, this, &MainWindow::logMessage);
 
         QThreadPool::globalInstance()->start(primeTask);
         primeRunning = true;
@@ -112,13 +113,13 @@ void MainWindow::on_primeStart_clicked()
     } else if (!primePaused) {
         primeTask->pause();
         primePaused = true;
-        ui->outputText->append("Výpočet prvočísel pozastaven.");
+        logMessage("Výpočet prvočísel pozastaven.");
         ui->primeStart->setText("Pokračovat");
 
     } else {
         primeTask->resume();
         primePaused = false;
-        ui->outputText->append("Výpočet prvočísel pokračuje.");
+        logMessage("Výpočet prvočísel pokračuje.");
         ui->primeStart->setText("Pozastavit");
     }
 }
@@ -131,5 +132,70 @@ void MainWindow::on_primeCancel_clicked()
         primePaused = false;
         ui->primeStart->setText("Start");
     }
+}
+
+
+void MainWindow::on_bubbleSortStart_clicked()
+{
+    if (!bubbleRunning) {
+        bool ok = false;
+        int size = ui->bubbleSortValue->text().toInt(&ok);
+        if (!ok || size < 2) {
+            ui->outputText->append("Zadej velikost pole větší než 1 pro Bubble Sort.");
+            return;
+        }
+
+        ui->bubbleSortProgressBar->setValue(0);
+        ui->bubbleSortETA->setText("počítám...");
+
+        bubbleTask = new BubbleSortTask(size);
+
+        connect(bubbleTask, &BubbleSortTask::progressChanged, ui->bubbleSortProgressBar, &QProgressBar::setValue);
+        connect(bubbleTask, &BubbleSortTask::etaChanged, ui->bubbleSortETA, &QLabel::setText);
+        connect(bubbleTask, &BubbleSortTask::finished, this, [=](const QString &result) {
+            logMessage("Bubble Sort výsledek: " + result);
+            bubbleRunning = false;
+            ui->bubbleSortStart->setText("Start");
+            ui->bubbleSortETA->setText("Hotovo");
+        });
+        connect(bubbleTask, &BubbleSortTask::canceled, this, [=]() {
+            bubbleRunning = false;
+            ui->bubbleSortStart->setText("Start");
+        });
+        connect(bubbleTask, &BubbleSortTask::logMessage, this, &MainWindow::logMessage);
+
+        QThreadPool::globalInstance()->start(bubbleTask);
+        bubbleRunning = true;
+        bubblePaused = false;
+        ui->bubbleSortStart->setText("Pozastavit");
+
+    } else if (!bubblePaused) {
+        bubbleTask->pause();
+        bubblePaused = true;
+        logMessage("Bubble Sort pozastaven.");
+        ui->bubbleSortStart->setText("Pokračovat");
+
+    } else {
+        bubbleTask->resume();
+        bubblePaused = false;
+        logMessage("Bubble Sort pokračuje.");
+        ui->bubbleSortStart->setText("Pozastavit");
+    }
+}
+
+
+void MainWindow::on_bubbleSortCancel_clicked()
+{
+    if (bubbleTask && bubbleRunning) {
+        bubbleTask->cancel();
+        bubblePaused = false;
+        ui->bubbleSortStart->setText("Start");
+    }
+}
+
+void MainWindow::logMessage(const QString &msg)
+{
+    QString time = QTime::currentTime().toString("HH:mm:ss");
+    ui->outputText->append(QString("[%1] %2").arg(time, msg));
 }
 

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "bubblesorttask.h"
 #include "factorialtask.h"
 #include "primetask.h"
 
@@ -29,6 +30,12 @@ private slots:
 
     void on_primeCancel_clicked();
 
+    void on_bubbleSortStart_clicked();
+
+    void on_bubbleSortCancel_clicked();
+
+    void logMessage(const QString &msg);
+
 private:
     Ui::MainWindow *ui;
 
@@ -39,6 +46,10 @@ private:
     PrimeTask *primeTask = nullptr;
     bool primeRunning = false;
     bool primePaused = false;
+
+    BubbleSortTask *bubbleTask = nullptr;
+    bool bubbleRunning = false;
+    bool bubblePaused = false;
 
 
 };

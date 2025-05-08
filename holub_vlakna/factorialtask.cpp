@@ -14,8 +14,8 @@ void FactorialTask::run()
     QElapsedTimer timer;
     timer.start();
 
-    emit logMessage(QString("[%1] Spouštím výpočet faktoriálu %2")
-                        .arg(QTime::currentTime().toString(), QString::number(number)));
+    emit logMessage(QString("Spouštím výpočet faktoriálu %1")
+                        .arg(QString::number(number)));
 
     double logSum = 0.0;
     for (quint64 i = 1; i <= number; ++i) {

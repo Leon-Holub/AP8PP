@@ -14,8 +14,8 @@ void PrimeTask::run()
     QElapsedTimer timer;
     timer.start();
 
-    emit logMessage(QString("[%1] Spouštím výpočet prvočísel do %2")
-                        .arg(QTime::currentTime().toString(), QString::number(upperLimit)));
+    emit logMessage(QString("Spouštím výpočet prvočísel do %1")
+                        .arg(QString::number(upperLimit)));
 
     std::vector<bool> isPrime(upperLimit + 1, true);
     isPrime[0] = isPrime[1] = false;
@@ -25,7 +25,6 @@ void PrimeTask::run()
 
     for (int i = 2; i <= sqrtLimit; ++i) {
         waitIfPaused();
-        if (i < sqrtLimit * 0.05) QThread::msleep(1);
 
         if (m_cancelled.load()) {
             emit canceled();
