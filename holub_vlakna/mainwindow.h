@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "factorialtask.h"
+#include "primetask.h"
 
 #include <QMainWindow>
 
@@ -24,12 +25,21 @@ private slots:
 
     void on_factorialCancel_clicked();
 
+    void on_primeStart_clicked();
+
+    void on_primeCancel_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     FactorialTask *factorialTask = nullptr;
     bool factorialRunning = false;
     bool factorialPaused = false;
+
+    PrimeTask *primeTask = nullptr;
+    bool primeRunning = false;
+    bool primePaused = false;
+
 
 };
 #endif // MAINWINDOW_H

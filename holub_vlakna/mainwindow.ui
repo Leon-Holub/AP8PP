@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -88,7 +88,7 @@
         <item>
          <widget class="QLabel" name="factorialETA">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Odhad</string>
           </property>
          </widget>
         </item>
@@ -126,7 +126,11 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="primeValue"/>
+            <widget class="QLineEdit" name="primeValue">
+             <property name="text">
+              <string>100000000</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -134,14 +138,14 @@
         <item>
          <widget class="QPushButton" name="primeStart">
           <property name="text">
-           <string>PushButton</string>
+           <string>Start</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="primeCancel">
           <property name="text">
-           <string>PushButton</string>
+           <string>Cancel</string>
           </property>
          </widget>
         </item>
@@ -152,14 +156,14 @@
         <item>
          <widget class="QProgressBar" name="primeProgressBar">
           <property name="value">
-           <number>24</number>
+           <number>0</number>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="primeETA">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Odhad</string>
           </property>
          </widget>
         </item>
