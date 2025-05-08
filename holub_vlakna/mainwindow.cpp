@@ -19,7 +19,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_factorialStart_clicked()
 {
     if (!factorialRunning) {
-        // Spuštění nového výpočtu
         bool ok = false;
         quint64 n = ui->factorialValue->text().toULongLong(&ok);
         if (!ok) {
@@ -34,7 +33,7 @@ void MainWindow::on_factorialStart_clicked()
 
         connect(factorialTask, &FactorialTask::progressChanged, ui->factorialProgressBar, &QProgressBar::setValue);
         connect(factorialTask, &FactorialTask::etaChanged, ui->factorialETA, &QLabel::setText);
-        connect(factorialTask, &FactorialTask::finished, this, [=](const QString &result) {
+        connect(factorialTask, &FactorialTask::finished, this, [=]() {
             factorialRunning = false;
             ui->factorialStart->setText("Start");
             ui->factorialETA->setText("Hotovo");
@@ -54,13 +53,11 @@ void MainWindow::on_factorialStart_clicked()
     } else if (!factorialPaused) {
         factorialTask->pause();
         factorialPaused = true;
-        logMessage("Faktoriál pozastaven.");
         ui->factorialStart->setText("Pokračovat");
 
     } else {
         factorialTask->resume();
         factorialPaused = false;
-        logMessage("Faktoriál pokračuje.");
         ui->factorialStart->setText("Pozastavit");
     }
 }
@@ -93,8 +90,7 @@ void MainWindow::on_primeStart_clicked()
 
         connect(primeTask, &PrimeTask::progressChanged, ui->primeProgressBar, &QProgressBar::setValue);
         connect(primeTask, &PrimeTask::etaChanged, ui->primeETA, &QLabel::setText);
-        connect(primeTask, &PrimeTask::finished, this, [=](const QString &result) {
-            logMessage("Prvočísla: " + result);
+        connect(primeTask, &PrimeTask::finished, this, [=]() {
             primeRunning = false;
             ui->primeStart->setText("Start");
             ui->primeETA->setText("Hotovo");
@@ -113,13 +109,11 @@ void MainWindow::on_primeStart_clicked()
     } else if (!primePaused) {
         primeTask->pause();
         primePaused = true;
-        logMessage("Výpočet prvočísel pozastaven.");
         ui->primeStart->setText("Pokračovat");
 
     } else {
         primeTask->resume();
         primePaused = false;
-        logMessage("Výpočet prvočísel pokračuje.");
         ui->primeStart->setText("Pozastavit");
     }
 }
@@ -152,8 +146,7 @@ void MainWindow::on_bubbleSortStart_clicked()
 
         connect(bubbleTask, &BubbleSortTask::progressChanged, ui->bubbleSortProgressBar, &QProgressBar::setValue);
         connect(bubbleTask, &BubbleSortTask::etaChanged, ui->bubbleSortETA, &QLabel::setText);
-        connect(bubbleTask, &BubbleSortTask::finished, this, [=](const QString &result) {
-            logMessage("Bubble Sort výsledek: " + result);
+        connect(bubbleTask, &BubbleSortTask::finished, this, [=]() {
             bubbleRunning = false;
             ui->bubbleSortStart->setText("Start");
             ui->bubbleSortETA->setText("Hotovo");
@@ -172,13 +165,11 @@ void MainWindow::on_bubbleSortStart_clicked()
     } else if (!bubblePaused) {
         bubbleTask->pause();
         bubblePaused = true;
-        logMessage("Bubble Sort pozastaven.");
         ui->bubbleSortStart->setText("Pokračovat");
 
     } else {
         bubbleTask->resume();
         bubblePaused = false;
-        logMessage("Bubble Sort pokračuje.");
         ui->bubbleSortStart->setText("Pozastavit");
     }
 }
@@ -193,9 +184,11 @@ void MainWindow::on_bubbleSortCancel_clicked()
     }
 }
 
-void MainWindow::logMessage(const QString &msg)
+void MainWindow::logMessage(const QString &msg, const QColor &color)
 {
     QString time = QTime::currentTime().toString("HH:mm:ss");
-    ui->outputText->append(QString("[%1] %2").arg(time, msg));
+    QString htmlMsg = QString("<span style='color:%1;'>[%2] %3</span>")
+                          .arg(color.name(), time, msg);
+    ui->outputText->append(htmlMsg);
 }
 

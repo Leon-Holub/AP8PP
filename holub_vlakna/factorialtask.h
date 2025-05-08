@@ -8,6 +8,7 @@
 #include <QWaitCondition>
 #include <atomic>
 #include <cmath>
+#include <QColor>
 
 class FactorialTask : public QObject, public QRunnable
 {
@@ -23,9 +24,9 @@ public:
 signals:
     void progressChanged(int percent);
     void etaChanged(const QString &eta);
-    void finished(const QString &result);
+    void finished();
     void canceled();
-    void logMessage(const QString &message);
+    void logMessage(const QString &message, QColor color = QColor("#e67e22"));
 
 private:
     quint64 number;

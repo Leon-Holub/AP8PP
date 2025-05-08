@@ -34,7 +34,7 @@ private slots:
 
     void on_bubbleSortCancel_clicked();
 
-    void logMessage(const QString &msg);
+    void logMessage(const QString &msg, const QColor &color = Qt::black);
 
 private:
     Ui::MainWindow *ui;

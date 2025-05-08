@@ -56,7 +56,8 @@ void BubbleSortTask::run()
     }
 
     emit progressChanged(100);
-    emit finished(result.trimmed());
+    emit finished();
+    emit logMessage("Bubble Sort výsledek:" + result.trimmed());
     emit logMessage("Bubble Sort dokončen.");
 }
 
@@ -69,12 +70,14 @@ void BubbleSortTask::cancel()
 void BubbleSortTask::pause()
 {
     m_paused.store(true);
+    emit logMessage("Bubble Sort pozastaven.");
 }
 
 void BubbleSortTask::resume()
 {
     m_paused.store(false);
     m_pauseCondition.wakeAll();
+    emit logMessage("Bubble Sort pokračuje.");
 }
 
 void BubbleSortTask::waitIfPaused()

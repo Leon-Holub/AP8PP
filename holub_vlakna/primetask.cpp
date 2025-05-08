@@ -56,7 +56,8 @@ void PrimeTask::run()
             ++primeCount;
     }
 
-    emit finished(QString("Nalezeno %1 prvočísel ≤ %2").arg(primeCount).arg(upperLimit));
+    emit finished();
+    emit logMessage(QString("Prvočísla: Nalezeno %1 prvočísel ≤ %2").arg(primeCount).arg(upperLimit));
     emit logMessage("Výpočet prvočísel dokončen.");
 }
 
@@ -69,12 +70,14 @@ void PrimeTask::cancel()
 void PrimeTask::pause()
 {
     m_paused.store(true);
+    emit logMessage("Výpočet prvočísel pozastaven.");
 }
 
 void PrimeTask::resume()
 {
     m_paused.store(false);
     m_pauseCondition.wakeAll();
+    emit logMessage("Výpočet prvočísel pokračuje.");
 }
 
 void PrimeTask::waitIfPaused()

@@ -40,8 +40,10 @@ void FactorialTask::run()
     }
 
     int digits = static_cast<int>(std::floor(logSum)) + 1;
-    emit finished(QString("Počet číslic ve %1! je přibližně: %2").arg(number).arg(digits));
+    emit finished();
+    emit logMessage(QString("Počet číslic ve %1! je přibližně: %2").arg(number).arg(digits));
     emit logMessage("Výpočet faktoriálu dokončen.");
+
 }
 
 void FactorialTask::cancel()
@@ -53,12 +55,14 @@ void FactorialTask::cancel()
 void FactorialTask::pause()
 {
     m_paused.store(true);
+    emit logMessage("Faktoriál pozastaven.");
 }
 
 void FactorialTask::resume()
 {
     m_paused.store(false);
     m_pauseCondition.wakeAll();
+    emit logMessage("Faktoriál pokračuje.");
 }
 
 void FactorialTask::waitIfPaused()

@@ -7,6 +7,7 @@
 #include <QMutex>
 #include <QWaitCondition>
 #include <atomic>
+#include <qcolor.h>
 
 class BubbleSortTask : public QObject, public QRunnable
 {
@@ -22,9 +23,9 @@ public:
 signals:
     void progressChanged(int percent);
     void etaChanged(const QString &eta);
-    void finished(const QString &result);
+    void finished();
     void canceled();
-    void logMessage(const QString &message);
+    void logMessage(const QString &message, QColor color = QColor("#8e44ad"));
 
 private:
     int dataSize;
